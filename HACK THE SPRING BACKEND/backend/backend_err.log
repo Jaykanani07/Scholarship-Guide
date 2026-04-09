@@ -1,0 +1,20 @@
+(node:14648) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Contact form error: {
+  code: 'PGRST205',
+  details: null,
+  hint: "Perhaps you meant the table 'public.categories'",
+  message: "Could not find the table 'public.contact_messages' in the schema cache"
+}
+Contact form error: {
+  code: '42501',
+  details: null,
+  hint: null,
+  message: 'new row violates row-level security policy for table "contact_messages"'
+}
+Contact form error: {
+  code: '42501',
+  details: null,
+  hint: null,
+  message: 'new row violates row-level security policy for table "contact_messages"'
+}

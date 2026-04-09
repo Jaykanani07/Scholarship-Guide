@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Profile.css">
+</head>
+
+<body>
+    <nav id="pageNavbar" class="navbar navbar-expand-lg"></nav>
+    <div class="formcontainer custom-formcontainer">
+        <div class="formchildcontainer">
+            <form class="row g-3 customform"onsubmit="return validatePasswords() && validateForm() && submitForm(); return false;">
+                <h2 class="form-heading col-12 custom-personal-details">Personal Details</h2>
+                <div class="col-12" style="display: flex;">
+                    <div class="col-md-6" style="padding-left: 4px;margin-top: 16px;">
+
+                        <label class="label" for="name">Name:</label>
+                        <input type="text" class="form-control" id="inputName">
+                    </div>
+                    <div class="col-md-6" style="padding: 10px;margin-top: 5px;">
+    
+                        <label class="label" for="email">Email:</label>
+                        <input type="email" class="form-control" id="inputEmail">
+                    </div>
+                </div>
+                <div class="col-md-12" style="display: flex;padding: 0px;">
+                    <div class="col-md-6" style="padding-top: 10px;">
+                        <label for="DOB">Date of Birth:</label>
+                        <input type="date" class="form-control" id="DOB" placeholder="DOB" name="dob">
+                    </div>
+                    <div class="col-md-6" style="padding-top: 10px;">
+                        <label style="margin-bottom: 0px;" for="gender">Income:</label>
+                        <select name="income" id="income" class="customdropdown2" required>
+                            <option value="" disabled selected>&nbsp;Family Income</option>
+                            <option value="">&nbsp;&nbsp;below one lakh</option>
+                            <option value="">&nbsp;&nbsp;below three lakh</option>
+                            <option value="">&nbsp;&nbsp;below five lakh</option>
+                            <option value="">&nbsp;&nbsp;below eight lakh</option>
+                            <option value="">&nbsp;&nbsp;more then eight lakh</option>
+    
+    
+                        </select>
+                    </div>
+                </div>
+                
+
+                <div class="col-12" style="display: flex;">
+                    <div class="col-md-6" style="padding-left: 0px;margin-top: 20px;"><label for="Caste">Caste</label></div>
+                    <div class="col-md-6" style="padding-left: 10px;margin-top: 20px;"><label for="City">City</label></div>
+                </div>
+                <div class="col-md-12" style="padding: 10px;display: flex;">
+                    <!-- <input type="email" class="form-control" id="inputEmail4" placeholder="Present Class"> -->
+                    <select name="caste" id="caste" class="customdropdown1" required>
+                        <option value="" style="color: gray;" disabled selected>&nbsp;Caste</option>
+                        <option value="option2" selected>Option 2</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+
+                    </select>
+                    <select name="city" id="city" class="customdropdown2" required>
+
+                        <option value="">&nbsp;&nbsp;Demo1</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+
+                    </select>
+                    <!-- </div> -->
+                </div>
+
+                <div class="col-12" style="padding: 10px;">
+                    <label class="label" for="Address" style="padding-left:5px;">Address:</label>
+                    <textarea type="text" class="form-control" id="inputAddress" placeholder="Address"></textarea>
+                </div>
+
+                <!-- Education -->
+                <h2 class="form-heading col-12 custom-education-details" style="padding-bottom: 20px;">Education Details
+                </h2>
+                <div class="col-12" style="display: flex;justify-content: space-between;">
+                    <div class="col-md-6" style="padding-left: 0px;"><label for="PresentClass">Present Class</label></div>
+                    <div class="col-md-6" style="padding-left: 10px;"><label for="PresentCourse">Present Course</label></div>
+                </div>
+                <div class="col-12" style="padding: 10px;display: flex;">
+                    <!-- <input type="email" class="form-control" id="inputEmail4" placeholder="Present Class"> -->
+                    <select name="presentclass" id="presentclass" class="customdropdown1" required>
+
+                        <option value="">&nbsp;&nbsp;demo</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+
+                    </select>
+                    <select name="course" id="course" class="customdropdown2" required>
+
+                        <option value="">&nbsp;&nbsp;Demo1</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+                        <option value="">&nbsp;&nbsp;Demo</option>
+
+                    </select>
+                    <!-- </div> -->
+                </div>
+                <div class="col-12 custom-regbtn">
+                    <button type="submit" class="btn btn-primary btn-block custom-btn">Edit</button>
+                </div>
+        </div>
+
+    </div>
+    </div>
+    <footer class="footer">
+        &copy; 2026 Scholarship Guide. All rights reserved.
+    </footer>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Load navbar
+            $("#pageNavbar").load("NavBar.html");
+
+            // Event handler for category buttons
+        
+            $.ajax({
+                url: 'http://localhost:3000/caste', // Your MongoDB-connected API endpoint
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#caste").empty();
+                    data.forEach(function (caste) {
+                        $("#caste").append(
+                            `<option value="${caste.caste}">${caste.caste}</option>`
+                        );
+                    });
+                }
+            });
+        
+            $.ajax({
+                url: 'http://localhost:3000/city', // Your MongoDB-connected API endpoint
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#city").empty();
+                    data.forEach(function (city) {
+                        $("#city").append(
+                            `<option value="${city.city}">${city.city}</option>`
+                        );
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(status, error); // Log any errors
+                }
+            });
+        
+            $.ajax({
+                url: 'http://localhost:3000/category', // Your MongoDB-connected API endpoint
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#presentclass").empty();
+                    data.forEach(function (present_class) {
+                        $("#presentclass").append(
+                            `<option value="${present_class.name}">${present_class.name}</option>`
+                        );
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(status, error); // Log any errors
+                }
+            });
+        
+            $.ajax({
+                url: 'http://localhost:3000/course', // Your MongoDB-connected API endpoint
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#course").empty();
+                    data.forEach(function (courses) {
+                        $("#course").append(
+                            `<option value="${courses.course}">${courses.course}</option>`
+                        );
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(status, error); // Log any errors
+                }
+            });
+        });
+        </script>
+        
+        <script>
+            function validatePasswords() {
+                var password = document.getElementById("password").value;
+                var retryPassword = document.getElementById("retypepassword").value;
+        
+                if (password !== retryPassword) {
+                    alert("Passwords do not match");
+                    return false; // Prevent form submission
+                }
+        
+                return true; // Allow form submission
+            }
+        
+            function validateForm() {
+                // Get the values of name and address fields
+                var nameValue = document.getElementById('inputName').value;
+                var addressValue = document.getElementById('inputAddress').value;
+        
+                // Check if the name contains any blank spaces
+                if (nameValue.trim() === '') {
+                    alert('Name cannot be empty or contain only blank spaces');
+                    return false; // Prevent form submission
+                }
+        
+                // Check if the address contains any blank spaces
+                if (addressValue.trim() === '') {
+                    alert('Address cannot be empty or contain only blank spaces');
+                    return false; // Prevent form submission
+                }
+        
+                // If everything is valid, allow form submission
+                return true;
+            }
+        </script>
+        <script>
+            // Function to retrieve form data
+            function getFormData() {
+                // Initialize an empty object to store form data
+                var formData = {};
+        
+                // Get the specific form elements by their IDs
+                document.getElementById('inputName').value(10);
+                var email = document.getElementById('inputEmail').value;
+                var dob = document.getElementById('DOB').value;
+                var caste = document.getElementById('caste').value;
+                var city = document.getElementById('city').value;
+                var income = document.getElementById('income').value;
+                var address = document.getElementById('inputAddress').value;
+                var presentclass = document.getElementById('presentclass').value;
+                var course = document.getElementById('course').value;
+        
+                // Add the values to the formData object
+                formData['name'] = name;
+                formData['email'] = email;
+                formData['dob'] = dob;
+                formData['caste'] = caste;
+                formData['city'] = city;
+                formData['income'] = income;
+                formData['address'] = address;
+                formData['presentclass'] = presentclass;
+                formData['course'] = course;
+        
+                // Return the object containing form data
+                return formData;
+            }
+        
+            // Function to display form data
+            function displayFormData() {
+                var formData = getFormData();
+                var displayArea = document.getElementById("formDataDisplay");
+                displayArea.innerHTML = "<h2>Form Data:</h2><pre>" + JSON.stringify(formData, null, 2) + "</pre>";
+            }
+        
+            // Example usage
+            function submitForm() {
+                // Display form data on the console
+                console.log(getFormData());
+        
+                // Display form data in the HTML
+                displayFormData();
+        
+                // Here you can send the form data to the backend using AJAX or perform any other actions
+            }
+        </script>
+        
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,178 @@
+.navbar {
+    background-color: #112c66;
+    width: 100%;
+
+}
+
+.navbar-nav {
+    color: white;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: white;
+    font-size: .6cm;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: #22438c;
+    color: white;
+}
+
+.dropdown-menu {
+    background-color: #112c66;
+    color: white;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #22438c;
+    color: white;
+}
+
+.btn-outline-custom {
+
+    font-weight: 600;
+    color: #112c66;
+    /* Text color */
+    background-color: rgb(255, 209, 3);
+    /* Custom background color */
+    /* border-color: #007bff; Border color */
+}
+.form-control::placeholder {
+    color: black;
+}
+footer {
+    background-color: #112c66;
+    color: white;
+    padding: 10px;
+    margin-top: 80px;
+    width: 100%;
+    text-align: center;
+}
+
+.custom-col-md-6 {
+    padding-top: 0px;
+}
+
+.custom-card {
+    border-radius: 7%;
+    border-color: #112c66;
+    border-width: 2px;
+}
+
+.custom-btn {
+    background-color: #112c66;
+    border-color: #112c66;
+    color: #fff;
+    padding: 10px;
+    width: 120px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.customdropdown1 {
+    height: 40px;
+    border-color: rgb(196, 192, 192);
+    width: 570px;
+    margin-right: 20px;
+    /* margin: 10px; */
+    border-radius: 4px;
+    /* padding-right: 10px; */
+    padding:5px; /* Adjust the padding to create space after the arrow */
+        /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path fill="black" d="M4 7l4-5H0z"/></svg>'); */
+        background-repeat: no-repeat;
+        background-position: right center;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+}
+
+.customdropdown2 {
+    height: 40px;
+    border-color: rgb(196, 192, 192);
+    width: 570px;
+    border-radius: 4px;
+    padding-right: 20px;
+    padding:5px; /* Adjust the padding to create space after the arrow */
+    /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path fill="black" d="M4 7l4-5H0z"/></svg>'); */
+    background-repeat: no-repeat;
+    background-position: right center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.custom-btn:hover {
+    background-color: rgb(255, 209, 3);
+    border-color: rgb(255, 209, 3);
+    color: #112c66;
+    padding: 13px;
+}
+
+.custom-form-group label {
+    color: #112c66;
+    font-weight: bold;
+}
+
+.formcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-card-body {
+
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+.custom-regbtn {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+.formchildcontainer {
+    width: 80%;
+    /* border: 2px solid #112c66; */
+    border-radius: 20px;
+    box-shadow: 10px 10px 41px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 41px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 41px 0px rgba(0, 0, 0, 0.75);
+}
+
+.customform {
+    padding: 40px 30px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+}
+
+.custom-personal-details {
+    color: #112c66;
+
+}
+
+.custom-education-details {
+    color: #112c66;
+    padding-top: 30px;
+}
+
+.custom-formcontainer {
+    margin-top: 70px;
+}

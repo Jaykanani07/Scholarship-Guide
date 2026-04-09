@@ -1,0 +1,161 @@
+<script></script>
+<div class="container-fluid">
+  <a class="navbar-brand" href="Home.html">
+    &nbsp;&nbsp;&nbsp;<img
+      src="hlexander (1).png"
+      width="60"
+      height="60"
+      alt="Logo"
+    />
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav justify-content-center">
+      <!-- Add justify-content-center -->
+      <li class="nav-item">
+        <a class="nav-link" href="Home.html"> &nbsp;&nbsp;Home &nbsp;&nbsp; </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          &nbsp;&nbsp;Government Scheme &nbsp;&nbsp;
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="Education.html">Education</a>
+          <a class="dropdown-item" href="Pansion.html">Pension</a>
+          <a class="dropdown-item" href="Health.html">Health care</a>
+          <a class="dropdown-item" href="Housing.html">Housing</a>
+          <a class="dropdown-item" href="Agriculture.HTML">Agriculture</a>
+          <a class="dropdown-item" href="Finance.html">Financial schemes</a>
+          <a class="dropdown-item" href="Business.html">Business</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="contact.html">
+          &nbsp;&nbsp;Contact Us &nbsp;&nbsp;
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="faq.html"> &nbsp;&nbsp;FAQ'S &nbsp;&nbsp; </a>
+      </li>
+      <li class="nav-item" id="linkLogin">
+        <a class="nav-link" href="Login.html"
+          >&nbsp;&nbsp;Login &nbsp;&nbsp;
+        </a>
+      </li>
+      <li class="nav-item" id="linkRegister">
+        <a class="nav-link" href="Register.html">
+          &nbsp;&nbsp;Register &nbsp;&nbsp;</a
+        >
+      </li>
+      <li class="nav-item" id="linkProfile">
+        <a class="nav-link" href="profile.html">
+          &nbsp;&nbsp;Profile &nbsp;&nbsp;&nbsp;</a
+        >
+      </li>
+      <li class="nav-item" id="linkAdmin" style="display:none;">
+        <a class="nav-link" href="Admin.html">
+          &nbsp;&nbsp;Admin Dashboard &nbsp;&nbsp;&nbsp;</a
+        >
+      </li>
+      <li class="nav-item" id="linkLogout" style="cursor: pointer">
+        <div class="nav-link">LogOut &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      </li>
+      <li>
+        <form class="form-inline custom-form">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-custom my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const loggedInApiUrl = "http://localhost:3000/loggedIn";
+  try {
+    $(document).ready(function () {
+      //check user
+      const token = localStorage.getItem("token");
+      if (!token) {
+        const pathname = window.location.pathname;
+        const filename = pathname.split("/").pop();
+        const filenamesToCheck = ["profile.html", "login.html"];
+        if (filenamesToCheck.includes(filename)) {
+          // window.location.href = "login.html";
+        }
+
+        $("#linkLogin").show();
+        $("#linkRegister").show();
+        $("#linkProfile").hide();
+        $("#linkLogout").hide();
+      } else {
+        $.ajax({
+          url: "http://localhost:3000/loggedIn",
+          type: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+          success: function (data) {
+            $("#linkLogin").hide();
+            $("#linkRegister").hide();
+            if (data.role === 'admin') {
+              $("#linkProfile").hide();
+              $("#linkAdmin").show();
+            } else {
+              $("#linkProfile").show();
+              $("#linkAdmin").hide();
+            }
+            $("#linkLogout").show();
+
+            const pathname = window.location.pathname;
+            const filename = pathname.split("/").pop();
+            const filenamesToCheck = ["register.html", "login.html"];
+            if (filenamesToCheck.includes(filename.toLowerCase())) {
+              window.location.href = "home.html";
+            }
+          },
+          error: function () {
+            console.error("Failed to access protected route");
+            // alert("Failed to access protected route");
+          },
+        });
+      }
+
+      $("#linkLogout").click(function () {
+        localStorage.removeItem("token");
+        window.location.href = "home.html";
+      });
+    });
+  } catch (error) {
+    console.error("Error in AJAX request:", error);
+  }
+</script>
+
+
+
+

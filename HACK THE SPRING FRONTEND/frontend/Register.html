@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | Scholarship Guide</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f1f5c 0%, #1a3a8f 40%, #112c66 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    .reg-wrapper {
+      display: flex;
+      width: 100%;
+      max-width: 1100px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+    }
+
+    /* Left panel - Branding (Hidden on very small screens) */
+    .reg-left {
+      flex: 0 0 35%;
+      background: linear-gradient(160deg, #1a3a8f 0%, #112c66 100%);
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .reg-left::before {
+      content: ''; position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,209,3,0.08);
+      top: -80px; left: -80px;
+    }
+    .brand-logo {
+      font-size: 28px; font-weight: 700; color: #fff;
+      margin-bottom: 40px; position: relative; z-index: 1;
+    }
+    .brand-logo span { color: #ffd103; }
+    .left-headline {
+      font-size: 32px; font-weight: 700; color: #fff;
+      line-height: 1.3; margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .left-sub {
+      font-size: 15px; color: rgba(255,255,255,0.7);
+      line-height: 1.6; position: relative; z-index: 1;
+    }
+
+    /* Right panel - Form */
+    .reg-right {
+      flex: 1;
+      padding: 40px 50px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    /* Custom Scrollbar for Right Panel */
+    .reg-right::-webkit-scrollbar { width: 6px; }
+    .reg-right::-webkit-scrollbar-track { background: transparent; }
+    .reg-right::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    
+    .reg-title {
+      font-size: 26px; font-weight: 700; color: #112c66; margin-bottom: 6px;
+    }
+    .reg-subtitle {
+      font-size: 14px; color: #6b7280; margin-bottom: 30px;
+    }
+    .reg-subtitle a { color: #1a3a8f; font-weight: 600; text-decoration: none; }
+    .reg-subtitle a:hover { text-decoration: underline; }
+
+    .section-title {
+      font-size: 16px; font-weight: 600; color: #112c66;
+      margin: 25px 0 15px 0; padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .form-group label {
+      font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;
+    }
+    
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap input, .input-wrap select, .input-wrap textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px; color: #111827; background: #f9fafb;
+      transition: all 0.2s; outline: none;
+    }
+    .input-wrap input:focus, .input-wrap select:focus, .input-wrap textarea:focus {
+      border-color: #1a3a8f; background: #fff; box-shadow: 0 0 0 3px rgba(26,58,143,0.1);
+    }
+    .input-wrap select { appearance: none; cursor: pointer; }
+    
+    /* Custom select arrow */
+    .select-arrow {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      pointer-events: none; color: #9ca3af; font-size: 12px;
+    }
+
+    /* Radio buttons */
+    .radio-group { display: flex; gap: 20px; align-items: center; height: 45px; }
+    .radio-item { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .radio-item input[type="radio"] { cursor: pointer; accent-color: #1a3a8f; }
+    .radio-item label { margin: 0; cursor: pointer; font-weight: 500; font-size: 14px; color: #4b5563; }
+
+    .btn-register {
+      width: 100%; padding: 14px; margin-top: 30px; margin-bottom: 15px;
+      background: linear-gradient(135deg, #1a3a8f, #112c66);
+      color: #fff; border: none; border-radius: 8px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-register:hover {
+      background: linear-gradient(135deg, #ffd103, #f5c800);
+      color: #112c66; transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255,209,3,0.4);
+    }
+    .btn-register:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    .alert-msg {
+      display: none; padding: 12px 16px; border-radius: 8px;
+      font-size: 13px; font-weight: 500; margin-bottom: 20px;
+    }
+    .alert-msg.error { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+    .alert-msg.success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+
+    .spinner {
+      display: inline-block; width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff;
+      border-radius: 50%; animation: spin 0.7s linear infinite;
+      vertical-align: middle; margin-right: 6px; display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 900px) {
+      .reg-left { display: none; }
+      .reg-right { padding: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="reg-wrapper">
+  <!-- Left Panel -->
+  <div class="reg-left">
+    <div class="brand-logo">Scholar<span>Guide</span></div>
+    <h2 class="left-headline">Join thousands discovering opportunities.</h2>
+    <p class="left-sub">Create your account to unlock personalized scheme recommendations, track applications, and secure your future.</p>
+  </div>
+
+  <!-- Right Form Panel -->
+  <div class="reg-right">
+    <h2 class="reg-title">Create an Account</h2>
+    <p class="reg-subtitle">Already have an account? <a href="Login.html">Log in here</a></p>
+
+    <div class="alert-msg" id="alertMsg"></div>
+
+    <form id="registerForm">
+      <!-- Section 1: Personal -->
+      <div class="section-title">Personal Details</div>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label>Full Name</label>
+          <div class="input-wrap">
+            <input type="text" id="inputName" placeholder="John Doe" required>
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label>Email Address</label>
+          <div class="input-wrap">
+            <input type="email" id="inputEmail" placeholder="you@example.com" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label>Date of Birth</label>
+          <div class="input-wrap">
+            <input type="date" id="DOB" required>
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label>Gender</label>
+          <div class="radio-group">
+            <div class="radio-item"><input type="radio" id="male" name="gender" value="male" required><label for="male">Male</label></div>
+            <div class="radio-item"><input type="radio" id="female" name="gender" value="female"><label for="female">Female</label></div>
+            <div class="radio-item"><input type="radio" id="other" name="gender" value="other"><label for="other">Other</label></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 form-group">
+          <label>Religion</label>
+          <div class="input-wrap">
+            <select id="Religion" required>
+              <option value="" disabled selected>Select Religion</option>
+              <option value="Hindu">Hindu</option>
+              <option value="Muslim">Muslim</option>
+              <option value="Christian">Christian</option>
+              <option value="Sikh">Sikh</option>
+              <option value="Jain">Jain</option>
+              <option value="Buddhist">Buddhist</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+        <div class="col-md-4 form-group">
+          <label>Caste Category</label>
+          <div class="input-wrap">
+            <select id="caste" required>
+              <option value="" disabled selected>Select Caste</option>
+              <option value="General">General</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+        <div class="col-md-4 form-group">
+          <label>Family Income</label>
+          <div class="input-wrap">
+            <select id="income" required>
+              <option value="" disabled selected>Select Income</option>
+              <option value="below one lakh">Below ₹1 Lakh</option>
+              <option value="below three lakh">Below ₹3 Lakh</option>
+              <option value="below five lakh">Below ₹5 Lakh</option>
+              <option value="below eight lakh">Below ₹8 Lakh</option>
+              <option value="more then eight lakh">Above ₹8 Lakh</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Contact & Education -->
+      <div class="section-title">Location &amp; Education</div>
+      
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label>City / District</label>
+          <div class="input-wrap">
+            <select id="city" required>
+              <option value="" disabled selected>Select City</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label>Present Class / Degree</label>
+          <div class="input-wrap">
+            <select id="presentclass" required>
+              <option value="" disabled selected>Select Class</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label>Specific Course</label>
+          <div class="input-wrap">
+            <select id="course" required>
+              <option value="" disabled selected>Select Course</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+        <div class="col-md-12 form-group">
+          <label>Full Address</label>
+          <div class="input-wrap">
+            <textarea id="inputAddress" rows="2" placeholder="Enter your full residential address..." required></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Security -->
+      <div class="section-title">Security</div>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password" placeholder="Create a strong password" required>
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label>Confirm Password</label>
+          <div class="input-wrap">
+            <input type="password" id="retypepassword" placeholder="Retype password" required>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-register" id="RegisterBtn">
+        <span class="spinner" id="spinner"></span>
+        <span id="btnText">Create Account</span>
+      </button>
+
+      <div style="text-align:center; font-size:13px; color:#6b7280;">
+        By registering you agree to our <a href="#" style="color:#1a3a8f;font-weight:600;">Terms &amp; Conditions</a>.
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  const showAlert = (msg, type) => {
+    const el = document.getElementById('alertMsg');
+    el.innerHTML = msg;
+    el.className = `alert-msg ${type}`;
+    el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  const setLoading = (loading) => {
+    const btn = document.getElementById('RegisterBtn');
+    const spinner = document.getElementById('spinner');
+    const text = document.getElementById('btnText');
+    btn.disabled = loading;
+    spinner.style.display = loading ? 'inline-block' : 'none';
+    text.textContent = loading ? 'Registering...' : 'Create Account';
+  };
+
+  $(document).ready(function () {
+    // Load Dropdown Data from Backend
+    const endpoints = [
+      { url: 'http://localhost:3000/caste', sel: '#caste', prop: 'caste' },
+      { url: 'http://localhost:3000/city', sel: '#city', prop: 'city' },
+      { url: 'http://localhost:3000/category', sel: '#presentclass', prop: 'name' },
+      { url: 'http://localhost:3000/course', sel: '#course', prop: 'course' }
+    ];
+
+    endpoints.forEach(ep => {
+      $.ajax({
+        url: ep.url, method: 'GET', dataType: 'json',
+        success: function(data) {
+          data.forEach(item => {
+            $(ep.sel).append(`<option value="${item[ep.prop]}">${item[ep.prop]}</option>`);
+          });
+        },
+        error: err => console.error(`Error loading ${ep.url}:`, err)
+      });
+    });
+
+    // Handle Submit
+    $('#registerForm').on('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('alertMsg').style.display = 'none';
+
+      const pass = $('#password').val();
+      const repass = $('#retypepassword').val();
+      if (pass !== repass) { return showAlert('Passwords do not match.', 'error'); }
+      if (pass.length < 6) { return showAlert('Password must be at least 6 characters.', 'error'); }
+
+      const genderElem = document.querySelector('input[name="gender"]:checked');
+      if (!genderElem) { return showAlert('Please select a gender.', 'error'); }
+
+      const data = {
+        name: $('#inputName').val().trim(),
+        email: $('#inputEmail').val().trim(),
+        dob: $('#DOB').val(),
+        gender: genderElem.value,
+        religion: $('#Religion').val(),
+        caste: $('#caste').val(),
+        income: $('#income').val(),
+        city: $('#city').val(),
+        presentClass: $('#presentclass').val(),
+        course: $('#course').val(),
+        address: $('#inputAddress').val().trim(),
+        password: pass
+      };
+
+      setLoading(true);
+
+      $.ajax({
+        url: 'http://localhost:3000/register',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(res) {
+          setLoading(false);
+          showAlert('Registration successful! Redirecting to login...', 'success');
+          setTimeout(() => { window.location.href = 'Login.html'; }, 1500);
+        },
+        error: function(xhr) {
+          setLoading(false);
+          const msg = xhr.responseText || 'Server error. Please try again.';
+          if (xhr.status === 409) {
+            showAlert('Email is already registered. Please login instead.', 'error');
+          } else {
+            showAlert('Registration Failed: ' + msg, 'error');
+          }
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
+
+
+

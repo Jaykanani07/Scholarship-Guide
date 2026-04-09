@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scholarships</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="Login.css" />
+  </head>
+  <body>
+    <nav id="pageNavbar" class="navbar navbar-expand-lg"></nav>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+      const loginUrl = "http://localhost:3000/login";
+
+      try {
+        $(document).ready(async function () {
+          // Load navbar
+          $("#pageNavbar").load("NavBar.html");
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const scheme = urlParams.get("scheme");
+          
+          
+        });
+      } catch (error) {}
+    </script>
+  </body>
+</html>
+
+
+
+

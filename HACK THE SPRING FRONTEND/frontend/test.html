@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protected</title>
+</head>
+<body>
+    <h1>Protected Page</h1>
+    <p id="message"></p>
+    <script>
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
+        fetch('http://localhost:3000/protected', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('message').textContent = data.message;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to access protected route');
+        });
+    </script>
+</body>
+</html>
+
+
+
+

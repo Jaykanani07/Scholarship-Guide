@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Education.css">
+  </head>
+
+  <body>
+    <nav id="pageNavbar" class="navbar navbar-expand-lg"></nav>
+    <div class="container" id="schemesContainer">
+</div>
+<footer class="footer">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#pageNavbar").load("NavBar.html");
+
+        const category = "Education";
+        const container = $("#schemesContainer");
+        container.html('<div class="w-100 text-center py-5"><h4>Loading schemes...</h4></div>');
+
+        $.ajax({
+          url: "http://localhost:3000/schemes/category/" + encodeURIComponent(category),
+          method: "GET",
+          success: function(data) {
+            container.empty();
+            if (data.length === 0) {
+              container.html('<div class="w-100 text-center py-5"><h4 class="text-muted">No schemes added in this category.</h4></div>');
+              return;
+            }
+            data.forEach(function(sc) {
+              // Limiting description to 80 chars so card height of 300px isn't broken
+              let shortDesc = sc.description;
+              if (shortDesc.length > 80) {
+                  shortDesc = shortDesc.substring(0, 77) + '...';
+              }
+              const card = `
+                <div class="card">
+                  <h4>${sc.scheme_name}</h4>
+                  <p>${shortDesc}</p>
+                  <a href="ScholarshipDetail.html?id=${sc.id}" class="btn custom-btn" style="color:white;text-decoration:none;">Apply Now</a>
+                </div>
+              `;
+              container.append(card);
+            });
+          },
+          error: function(err) {
+            container.html('<div class="w-100 text-center py-5 text-danger"><h4>Error loading schemes. Please try again.</h4></div>');
+          }
+        });
+      });
+    </script>
+</body>
+</html>

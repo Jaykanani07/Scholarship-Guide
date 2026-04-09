@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Home.css">
+    <style>
+.coco *{
+  max-width: 400px;
+}
+.chatbot-icon {
+    position: fixed;      /* Keep it fixed on the screen */
+    bottom: 20px;         /* Distance from the bottom */
+    right: 20px;          /* Distance from the right */
+    background-color: #112c66; /* Example background color */
+    color: white;          /* Text color (including icon) */
+    padding: 15px;
+    border-radius: 50%;   /* Make it a circle */
+    cursor: pointer;      /* Indicate it's clickable */
+    z-index: 1000;        /* Ensure it's on top of other content */
+    text-decoration: none; /* Remove any underline from the link */
+  }
+  
+  .chatbot-icon i {
+    font-size: 24px;      /* Adjust icon size as needed */
+    color: yellow;       /* Change the icon color here */
+  }
+  #chatbot-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+}
+
+/* Style for the chatbot container */
+#chatbot-container {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 998;
+}
+main.vfrc-chat--dialog {
+  max-width: 400px;
+}
+
+.chatbot-icon {
+  position: fixed;      /* Keep it fixed on the screen */
+  bottom: 20px;         /* Distance from the bottom */
+  right: 20px;          /* Distance from the right */
+  background-color: #112c66; /* Example background color */
+  color: white;    /* Make it a circle */
+  cursor: pointer;      /* Indicate it's clickable */
+  z-index: 1000;        /* Ensure it's on top of other content */
+  text-decoration: none; /* Remove any underline from the link */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  width: 60px;
+  height: 60px;
+}
+
+.chatbot-icon i {
+  font-size: 24px;      /* Adjust icon size as needed */
+  color: yellow; 
+        /* Change the icon color here */
+}
+    </style>
+  </head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="Chatbot.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <body>
+    <nav id="pageNavbar" class="navbar navbar-expand-lg"></nav>
+    <a href="https://creator.voiceflow.com/prototype/65dcbd7745e2c0b4b548983a">
+      <div class="chatbot-icon">
+        <i class="material-icons">chat_bubble_outline</i>
+  </div>
+</a>
+    <div class="slideshow-container">
+      <div class="mySlides">
+        <img src="slide1.webp" style="width:1300px; height: 550px;">
+      </div>
+
+      <div class="mySlides">
+        <img src="slide2.webp" style="width:1300px; height: 550px;">
+      </div>
+
+      <div class="mySlides">
+        <img src="slide3.webp" style="width:1300px; height: 550px;">
+      </div> <br>
+
+      <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="container">
+        <div class="card">
+          <img src="undergraduate.jpg" class="card-img-top" alt="Scholarship Image">
+          <div class="card-body">
+            <a href="Education.html" class="card-link">
+              <center>EDUCATION</center>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="general-health-care.jpg" class="card-img-top" alt="Health Image">
+          <div class="card-body">
+            <a href="Health.html" class="card-link">
+              <center>HEALTH</center>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="housing.jpg" class="card-img-top" alt="Housing Image">
+          <div class="card-body">
+            <a href="Housing.html" class="card-link">
+              <center>HOUSING</center>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="financial.jpg" class="card-img-top" alt="Financial Support Image">
+          <div class="card-body">
+            <a href="Finance.html" class="card-link">
+              <center>FINANCIAL SUPPORT</center>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="pension.jpg" class="card-img-top" alt="Pension Image">
+          <div class="card-body">
+            <a href="Pansion.html" class="card-link">
+              <center>PENSION</center>
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <div>
+        <div class="color1">
+          <h1 id="heading"> How it works</font>
+          </h1>
+
+          <div class="gallery">
+            <div class="content">
+              <img src="how-it-works-icon1.jpg" style="margin-bottom: 25px;">
+              <h4>Create your Profile </h4>
+              <p>Provide some basic details super-quick <br> and get registered with us.</p>
+
+            </div>
+            <div class="content2">
+              <img src="how-it-works-icon2.jpg" style="margin-bottom: 25px;">
+              <h4>Get notified for <br> matching Scholarship </h4>
+              <p>Get instant notification as soon as any scholarship matches your profile.</p>
+
+            </div>
+            <div class="content">
+              <img src="how-it-works-icon3.jpg" style="margin-bottom: 25px;">
+              <h4>Apply for scholarships</h4>
+              <p>Apply to the scholarships according to <br> your need and eligibility.</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="color2"></div>
+      </div>
+    </div> 
+    
+    <footer class="footer">
+      &copy; 2026 Scholarship Guide. All rights reserved.
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+      var slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+      }
+    </script>
+    <script>
+      try {
+        $(document).ready(function () {
+          // Load navbar
+          $("#pageNavbar").load("NavBar.html");
+          $("#boter").load("bot.html");
+
+          
+        })}catch(e){}
+    </script>
+   
+
+
+
+   <!-- chat bot -->
+   <style>
+    #chatbot-container {
+position: fixed;
+bottom: 20px;
+right: 20px;
+z-index: 999;
+}
+
+#chatbot-icon {
+display: block;
+width: 50px; /* Adjust the size as needed */
+height: 50px;
+border-radius: 50%;
+background-color: #007bff; /* Change the background color */
+text-align: center;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#chatbot-icon img {
+width: 100%;
+height: 100%;
+}
+
+</style>
+
+   <div id="chatbot-container">
+    <a href="Chatbot.html" id="chatbot-icon" onclick="openChatbotPage()">
+        <img src="chatbot-icon.png" alt="Chatbot Icon">
+    </a>
+</div>
+
+<script>
+function openChatbotPage() {
+    window.open('chatbot.html', '_blank'); // Replace 'chatbot-page.html' with the actual page URL
+}
+</script>
+
+  </body>
+
+</html>
+
+
+
