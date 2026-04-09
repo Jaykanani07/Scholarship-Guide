@@ -27,6 +27,7 @@ const allowedOrigins = [
   "http://localhost:5500",
   "http://127.0.0.1:5500",
   "https://scholarship-guide.onrender.com",
+  "https://scholarship-guide-jade.vercel.app",
 ];
 
 app.use(
