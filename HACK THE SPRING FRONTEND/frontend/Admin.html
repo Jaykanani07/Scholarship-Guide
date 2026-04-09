@@ -137,7 +137,7 @@
           success: function(data) {
             if (data.role !== 'admin') {
               alert("Access denied. Admin only.");
-              window.location.href = "Home.html";
+              window.location.href = "index.html";
             } else {
               // Load navbar and fetch schemes
               $("#pageNavbar").load("NavBar.html");

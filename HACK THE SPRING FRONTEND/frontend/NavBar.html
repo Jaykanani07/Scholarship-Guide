@@ -1,6 +1,6 @@
 <script></script>
 <div class="container-fluid">
-  <a class="navbar-brand" href="Home.html">
+  <a class="navbar-brand" href="index.html">
     &nbsp;&nbsp;&nbsp;<img
       src="hlexander (1).png"
       width="60"
@@ -23,7 +23,7 @@
     <ul class="navbar-nav justify-content-center">
       <!-- Add justify-content-center -->
       <li class="nav-item">
-        <a class="nav-link" href="Home.html"> &nbsp;&nbsp;Home &nbsp;&nbsp; </a>
+        <a class="nav-link" href="index.html"> &nbsp;&nbsp;Home &nbsp;&nbsp; </a>
       </li>
       <li class="nav-item dropdown">
         <a
@@ -136,7 +136,7 @@
             const filename = pathname.split("/").pop();
             const filenamesToCheck = ["register.html", "login.html"];
             if (filenamesToCheck.includes(filename.toLowerCase())) {
-              window.location.href = "home.html";
+              window.location.href = "index.html";
             }
           },
           error: function () {
@@ -148,7 +148,7 @@
 
       $("#linkLogout").click(function () {
         localStorage.removeItem("token");
-        window.location.href = "home.html";
+        window.location.href = "index.html";
       });
     });
   } catch (error) {

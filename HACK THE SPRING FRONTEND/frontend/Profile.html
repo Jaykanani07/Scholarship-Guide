@@ -563,7 +563,7 @@
           success: function () {
             setLoading(false);
             showAlert("Profile successfully updated!", "success");
-            window.location.href = "Home.html";
+            window.location.href = "index.html";
           },
           error: function (xhr) {
             setLoading(false);
@@ -576,7 +576,7 @@
       $('#logoutBtn').on('click', function () {
         localStorage.removeItem("token");
         localStorage.removeItem("email");
-        window.location.href = "Home.html";
+        window.location.href = "index.html";
       });
     });
   </script>
