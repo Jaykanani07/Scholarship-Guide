@@ -53,4 +53,9 @@ app.post("/login", async (req, res) => {
   res.status(200).send();
 });
 
+
+app.get('/', (req, res) => {
+res.send('Backend is running!');
+});
+
 app.listen(3000);

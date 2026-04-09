@@ -75,3 +75,7 @@ dbconnect().then(() => {
 }).catch((error) => {
     console.error('Error connecting to MongoDB:', error);
 });
+
+app.get('/', (req, res) => {
+res.send('Backend is running!');
+});
