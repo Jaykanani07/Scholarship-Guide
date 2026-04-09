@@ -27,7 +27,7 @@ javascript_template = """
         container.html('<div class="w-100 text-center py-5"><h4>Loading schemes...</h4></div>');
 
         $.ajax({
-          url: "http://localhost:3000/schemes/category/" + encodeURIComponent(category),
+          url: "https://scholarship-guide.onrender.com/schemes/category/" + encodeURIComponent(category),
           method: "GET",
           success: function(data) {
             container.empty();

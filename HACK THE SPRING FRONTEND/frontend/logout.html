@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,10 +19,10 @@
             // Remove the token from localStorage
             localStorage.removeItem('token');
             // Redirect to the login page or the logged out route
-            window.location.href = 'http://localhost:3000/logout';
+            window.location.href = 'https://scholarship-guide.onrender.com/logout';
         });
 
-        fetch('http://localhost:3000/protected', {
+        fetch('https://scholarship-guide.onrender.com/protected', {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
@@ -38,6 +38,7 @@
     </script>
 </body>
 </html>
+
 
 
 

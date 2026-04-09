@@ -1,26 +1,49 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
-const store = new session.MemoryStore();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const supabase = require("./supabaseClient");
 
-const JWT_SECRET = "scholarship-guide-secret-key-2024";
+// In production (Render), configure these via environment variables.
+// Fallbacks are kept so local development still works.
+const JWT_SECRET = process.env.JWT_SECRET || "scholarship-guide-secret-key-2024";
+const SESSION_SECRET = process.env.SESSION_SECRET || "your-secret-key";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+// Session store: MemoryStore is OK for local/dev but not for production scaling.
+// (Render free tier typically runs one instance, but still better to migrate later.)
+const store = new session.MemoryStore();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({
-  origin: ["http://localhost:8080", "http://127.0.0.1:8080", "http://localhost:5500", "http://127.0.0.1:5500"],
-  credentials: true
-}));
+// CORS: allow local dev + deployed frontends.
+// If you deploy the frontend (Netlify/Vercel/GitHub Pages), add that URL here too.
+const allowedOrigins = [
+  "http://localhost:8080",
+  "http://127.0.0.1:8080",
+  "http://localhost:5500",
+  "http://127.0.0.1:5500",
+  "https://scholarship-guide.onrender.com",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow non-browser requests (curl/postman) with no origin
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS: " + origin));
+    },
+    credentials: true,
+  })
+);
 
 app.use(
   session({
-    secret: "your-secret-key",
+    secret: SESSION_SECRET,
     cookie: { maxAge: 3600000 }, // 1 hour
     resave: false,
     saveUninitialized: false,

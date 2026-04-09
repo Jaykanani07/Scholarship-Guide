@@ -96,7 +96,7 @@
 </div>
 
 <script>
-  const loggedInApiUrl = "http://localhost:3000/loggedIn";
+  const loggedInApiUrl = "https://scholarship-guide.onrender.com/loggedIn";
   try {
     $(document).ready(function () {
       //check user
@@ -115,7 +115,7 @@
         $("#linkLogout").hide();
       } else {
         $.ajax({
-          url: "http://localhost:3000/loggedIn",
+          url: "https://scholarship-guide.onrender.com/loggedIn",
           type: "GET",
           headers: {
             Authorization: "Bearer " + token,

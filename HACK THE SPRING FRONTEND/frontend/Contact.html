@@ -91,7 +91,7 @@
           btn.text("Sending...").prop("disabled", true);
 
           $.ajax({
-            url: "http://localhost:3000/contact",
+            url: "https://scholarship-guide.onrender.com/contact",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ name, email, message }),

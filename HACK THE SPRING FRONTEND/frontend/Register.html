@@ -344,10 +344,10 @@
   $(document).ready(function () {
     // Load Dropdown Data from Backend
     const endpoints = [
-      { url: 'http://localhost:3000/caste', sel: '#caste', prop: 'caste' },
-      { url: 'http://localhost:3000/city', sel: '#city', prop: 'city' },
-      { url: 'http://localhost:3000/category', sel: '#presentclass', prop: 'name' },
-      { url: 'http://localhost:3000/course', sel: '#course', prop: 'course' }
+      { url: 'https://scholarship-guide.onrender.com/caste', sel: '#caste', prop: 'caste' },
+      { url: 'https://scholarship-guide.onrender.com/city', sel: '#city', prop: 'city' },
+      { url: 'https://scholarship-guide.onrender.com/category', sel: '#presentclass', prop: 'name' },
+      { url: 'https://scholarship-guide.onrender.com/course', sel: '#course', prop: 'course' }
     ];
 
     endpoints.forEach(ep => {
@@ -393,7 +393,7 @@
       setLoading(true);
 
       $.ajax({
-        url: 'http://localhost:3000/register',
+        url: 'https://scholarship-guide.onrender.com/register',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -417,6 +417,4 @@
 </script>
 </body>
 </html>
-
-
 

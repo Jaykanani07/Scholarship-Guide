@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const frontend_dir = __dirname;
@@ -27,7 +27,7 @@ const javascript_template = (cat) => `
             container.html('<div class="status-msg">Loading schemes...</div>');
 
         $.ajax({
-          url: "http://localhost:3000/schemes/category/" + encodeURIComponent(category),
+          url: "https://scholarship-guide.onrender.com/schemes/category/" + encodeURIComponent(category),
           method: "GET",
           success: function(data) {
             container.empty();
@@ -90,3 +90,4 @@ for (const [filename, cat_name] of Object.entries(categories)) {
     fs.writeFileSync(filepath, content, 'utf-8');
     console.log(`Updated ${filename}`);
 }
+
