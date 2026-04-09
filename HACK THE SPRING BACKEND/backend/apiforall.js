@@ -334,6 +334,10 @@ app.delete("/admin/schemes/:id", authenticateAdmin, async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send(" Scholarship Guide Backend is Running!");
+});
+
 // ================================================
 
 // Start the server
