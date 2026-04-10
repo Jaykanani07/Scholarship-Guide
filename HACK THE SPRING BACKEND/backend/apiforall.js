@@ -358,6 +358,36 @@ app.delete("/admin/schemes/:id", authenticateAdmin, async (req, res) => {
   }
 });
 
+// ====== CONTACT MESSAGES (ADMIN) ======
+
+// GET all contact messages (Admin Only)
+app.get("/admin/contact-messages", authenticateAdmin, async (req, res) => {
+  try {
+    const { data: messages, error } = await supabase
+      .from('contact_messages')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    res.status(200).json(messages);
+  } catch (error) {
+    console.error("Fetch contact messages error:", error);
+    res.status(500).json({ error: "Failed to fetch contact messages" });
+  }
+});
+
+// DELETE a contact message (Admin Only)
+app.delete("/admin/contact-messages/:id", authenticateAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { error } = await supabase.from('contact_messages').delete().eq('id', id);
+    if (error) throw error;
+    res.status(200).json({ message: "Message deleted successfully" });
+  } catch (error) {
+    console.error("Delete contact message error:", error);
+    res.status(500).json({ error: "Failed to delete message" });
+  }
+});
+
 app.get("/", (req, res) => {
   res.send(" Scholarship Guide Backend is Running!");
 });

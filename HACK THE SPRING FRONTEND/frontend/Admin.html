@@ -15,30 +15,68 @@
 
   <div class="container mt-5 admin-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="admin-title">Admin Dashboard - Schemes</h2>
-      <button class="btn btn-primary btn-add" data-toggle="modal" data-target="#schemeModal" onclick="openAddModal()">
-        <i class="material-icons align-middle">add</i> Add Scheme
-      </button>
+      <h2 class="admin-title">Admin Dashboard</h2>
+      <div id="schemesHeaderActions">
+        <button class="btn btn-primary btn-add" data-toggle="modal" data-target="#schemeModal" onclick="openAddModal()">
+          <i class="material-icons align-middle">add</i> Add Scheme
+        </button>
+      </div>
     </div>
 
-    <!-- Schemes Table -->
-    <div class="table-responsive bg-white rounded shadow-sm p-3">
-      <table class="table table-hover align-middle">
-        <thead class="thead-light">
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th class="text-right">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="schemesTableBody">
-          <!-- Rows dynamically populated -->
-          <tr>
-            <td colspan="4" class="text-center py-4">Loading schemes...</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist" style="border-bottom: 2px solid #e2e8f0;">
+      <li class="nav-item">
+        <a class="nav-link active font-weight-bold" id="schemes-tab" data-toggle="tab" href="#schemesSection" role="tab" style="color: #1a3a8f; border: none; padding: 12px 24px;">Schemes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold" id="messages-tab" data-toggle="tab" href="#messagesSection" role="tab" style="color: #64748b; border: none; padding: 12px 24px;">Contact Messages</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Schemes Section -->
+      <div class="tab-pane fade show active" id="schemesSection" role="tabpanel">
+        <div class="table-responsive bg-white rounded shadow-sm p-3">
+          <table class="table table-hover align-middle">
+            <thead class="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="schemesTableBody">
+              <!-- Rows dynamically populated -->
+              <tr>
+                <td colspan="4" class="text-center py-4">Loading schemes...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Messages Section -->
+      <div class="tab-pane fade" id="messagesSection" role="tabpanel">
+        <div class="table-responsive bg-white rounded shadow-sm p-3">
+          <table class="table table-hover align-middle">
+            <thead class="thead-light">
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="messagesTableBody">
+              <tr>
+                <td colspan="5" class="text-center py-4">Loading messages...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -139,9 +177,10 @@
               alert("Access denied. Admin only.");
               window.location.href = "index.html";
             } else {
-              // Load navbar and fetch schemes
+              // Load navbar and fetch initial data
               $("#pageNavbar").load("NavBar.html");
               fetchSchemes();
+              fetchMessages();
             }
           },
           error: function() {
@@ -149,6 +188,20 @@
           }
         });
       }
+
+      // Handle Tab Switching
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        const target = $(e.target).attr("href");
+        if (target === "#schemesSection") {
+          $("#schemesHeaderActions").show();
+          $(e.target).css("color", "#1a3a8f");
+          $("#messages-tab").css("color", "#64748b");
+        } else {
+          $("#schemesHeaderActions").hide();
+          $(e.target).css("color", "#1a3a8f");
+          $("#schemes-tab").css("color", "#64748b");
+        }
+      });
 
       // Handle Form Submit
       $("#schemeForm").on("submit", function(e) {
@@ -276,6 +329,64 @@
         headers: { "Authorization": "Bearer " + token },
         success: function() {
           fetchSchemes();
+        },
+        error: function(err) {
+          alert("Failed to delete: " + (err.responseJSON ? err.responseJSON.error : "Error"));
+        }
+      });
+    }
+
+    // ====== Contact Messages Logic ======
+
+    function fetchMessages() {
+      $("#messagesTableBody").html('<tr><td colspan="5" class="text-center py-4">Loading...</td></tr>');
+      $.ajax({
+        url: `${API_URL}/admin/contact-messages`,
+        method: "GET",
+        headers: { "Authorization": "Bearer " + token },
+        success: function(data) {
+          renderMessagesTable(data);
+        },
+        error: function(err) {
+          $("#messagesTableBody").html(`<tr><td colspan="5" class="text-center text-danger">Failed to load messages</td></tr>`);
+        }
+      });
+    }
+
+    function renderMessagesTable(messages) {
+      const tbody = $("#messagesTableBody");
+      tbody.empty();
+      if (!messages || messages.length === 0) {
+        tbody.append('<tr><td colspan="5" class="text-center py-4 text-muted">No messages found.</td></tr>');
+        return;
+      }
+
+      messages.forEach(msg => {
+        const date = new Date(msg.created_at).toLocaleDateString();
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td class="text-muted small">${date}</td>
+          <td class="font-weight-600">${msg.name}</td>
+          <td><a href="mailto:${msg.email}">${msg.email}</a></td>
+          <td style="max-width:300px; white-space: normal;">${msg.message}</td>
+          <td class="text-right">
+            <button class="btn btn-sm btn-outline-danger" onclick="deleteMessage('${msg.id}')">
+              <i class="material-icons" style="font-size:16px;">delete</i>
+            </button>
+          </td>
+        `;
+        tbody.append(tr);
+      });
+    }
+
+    function deleteMessage(id) {
+      if(!confirm("Are you sure you want to delete this message?")) return;
+      $.ajax({
+        url: `${API_URL}/admin/contact-messages/${id}`,
+        method: "DELETE",
+        headers: { "Authorization": "Bearer " + token },
+        success: function() {
+          fetchMessages();
         },
         error: function(err) {
           alert("Failed to delete: " + (err.responseJSON ? err.responseJSON.error : "Error"));
