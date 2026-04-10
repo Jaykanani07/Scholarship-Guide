@@ -119,6 +119,21 @@
     .login-subtitle a { color: #1a3a8f; font-weight: 600; text-decoration: none; }
     .login-subtitle a:hover { text-decoration: underline; }
 
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #6b7280;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .back-home:hover {
+      color: #112c66;
+    }
+
     .form-group label {
       font-size: 13px;
       font-weight: 600;
@@ -244,7 +259,7 @@
 <div class="login-wrapper">
   <!-- Left Branding Panel -->
   <div class="login-left">
-    <div class="brand-logo">Scholar<span>Guide</span></div>
+    <a href="index.html" style="text-decoration:none;"><div class="brand-logo">Scholar<span>Guide</span></div></a>
     <h2 class="left-headline">Your Gateway to Government Scholarships &amp; Schemes</h2>
     <p class="left-sub">Access 21+ government schemes across Education, Health, Housing, Agriculture, Finance &amp; Business — all in one place.</p>
     <div class="left-badges">
@@ -259,6 +274,10 @@
 
   <!-- Right Login Form -->
   <div class="login-right">
+    <a href="index.html" class="back-home">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Home
+    </a>
     <h2 class="login-title">Welcome back</h2>
     <p class="login-subtitle">Don't have an account? <a href="Register.html">Create one</a></p>
 

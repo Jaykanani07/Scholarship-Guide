@@ -48,12 +48,12 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="contact.html">
+        <a class="nav-link" href="Contact.html">
           &nbsp;&nbsp;Contact Us &nbsp;&nbsp;
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="faq.html"> &nbsp;&nbsp;FAQ'S &nbsp;&nbsp; </a>
+        <a class="nav-link" href="FAQ.html"> &nbsp;&nbsp;FAQ'S &nbsp;&nbsp; </a>
       </li>
       <li class="nav-item" id="linkLogin">
         <a class="nav-link" href="Login.html"
@@ -66,7 +66,7 @@
         >
       </li>
       <li class="nav-item" id="linkProfile">
-        <a class="nav-link" href="profile.html">
+        <a class="nav-link" href="Profile.html">
           &nbsp;&nbsp;Profile &nbsp;&nbsp;&nbsp;</a
         >
       </li>
@@ -104,7 +104,7 @@
       if (!token) {
         const pathname = window.location.pathname;
         const filename = pathname.split("/").pop();
-        const filenamesToCheck = ["profile.html", "login.html"];
+        const filenamesToCheck = ["Profile.html", "Login.html"];
         if (filenamesToCheck.includes(filename)) {
           // window.location.href = "login.html";
         }
@@ -134,7 +134,7 @@
 
             const pathname = window.location.pathname;
             const filename = pathname.split("/").pop();
-            const filenamesToCheck = ["register.html", "login.html"];
+            const filenamesToCheck = ["Register.html", "Login.html"];
             if (filenamesToCheck.includes(filename.toLowerCase())) {
               window.location.href = "index.html";
             }

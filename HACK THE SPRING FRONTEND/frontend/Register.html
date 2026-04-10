@@ -83,6 +83,21 @@
     .reg-subtitle a { color: #1a3a8f; font-weight: 600; text-decoration: none; }
     .reg-subtitle a:hover { text-decoration: underline; }
 
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #6b7280;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .back-home:hover {
+      color: #112c66;
+    }
+
     .section-title {
       font-size: 16px; font-weight: 600; color: #112c66;
       margin: 25px 0 15px 0; padding-bottom: 8px;
@@ -161,13 +176,17 @@
 <div class="reg-wrapper">
   <!-- Left Panel -->
   <div class="reg-left">
-    <div class="brand-logo">Scholar<span>Guide</span></div>
+    <a href="index.html" style="text-decoration:none;"><div class="brand-logo">Scholar<span>Guide</span></div></a>
     <h2 class="left-headline">Join thousands discovering opportunities.</h2>
     <p class="left-sub">Create your account to unlock personalized scheme recommendations, track applications, and secure your future.</p>
   </div>
 
   <!-- Right Form Panel -->
   <div class="reg-right">
+    <a href="index.html" class="back-home">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Home
+    </a>
     <h2 class="reg-title">Create an Account</h2>
     <p class="reg-subtitle">Already have an account? <a href="Login.html">Log in here</a></p>
 
@@ -230,7 +249,6 @@
           <div class="input-wrap">
             <select id="caste" required>
               <option value="" disabled selected>Select Caste</option>
-              <option value="General">General</option>
             </select>
             <span class="select-arrow">▼</span>
           </div>
